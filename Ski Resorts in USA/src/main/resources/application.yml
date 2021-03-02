@@ -1,0 +1,23 @@
+#server:
+#  port: 8081
+
+#---
+#resort:
+#  id: CA00001
+#  name: Mammoth Mountain
+#  website: https://www.mammothmountain.com/
+#  state: CALIFORNIA
+#  price-range: HIGH
+#  address-map:
+#    Main Lodge:
+#      state: CALIFORNIA
+#      city: Mammoth Lakes
+#      street: 10001 Minaret Road
+#      zip-code: 93564
+
+#spring:
+#  jackson:
+#    default-property-inclusion: ALWAYS
+#    time-zone: GMT-6
+#    date-format: yyyy-MM-dd HH:mm:ss
+#    time-format: HH:mm

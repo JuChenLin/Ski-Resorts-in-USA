@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <title>Ski Resorts in USA - Edit</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/offcanvas/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .form-label {
+        margin-bottom: 0.2rem;
+      }
+
+      .form-control {
+        margin-bottom: 0.5rem;
+      }
+
+      .input-group {
+        max-width: 100%;
+        margin: -15px auto;
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="edit.css" th:href="@{/asserts/css/edit.css}" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <!--   Import Top Bar   -->
+    <div th:replace="~{partials/header :: header(activeUri='edit')}"></div>
+
+    <main role="main" class="container">
+        <!--  Adding or Editing Ski Resort:   -->
+        <h2 class="mx-4 my-4"> Ski Resort Information </h2>
+        <div>
+            <form th:action="@{/resort}" method="post">
+                <input type="hidden" name="_method" value="put" th:if="${resort!=null}"/>
+                <input type="hidden" name="id" th:if="${resort!=null}" th:value="${resort.id}">
+                <div class="row my-3 p-3 bg-white rounded shadow-sm input-group">
+
+                    <div class="col-md-4">
+                        <label for="inputName" class="form-label">Name</label>
+                        <input name="name" type="text" class="form-control" id="inputName" th:value="${resort!=null}?${resort.name}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputWebsite" class="form-label">Website</label>
+                        <input name="website" type="text" class="form-control" id="inputWebsite"  th:value="${resort!=null}?${resort.website}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inputPriceRange" class="form-label">Price Range</label>
+                        <select name="priceRange" type="text" class="form-control" id="inputPriceRange">
+                            <option selected disabled value="">Price</option>
+                            <option th:selected="${resort!=null}?${price == resort.priceRange}" th:value="${price}" th:each="price:${priceRanges}" th:text="${price}">1</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inputAnnualSnowfall" class="form-label">Annual Snowfall</label>
+                        <input name="annualSnowfall" type="number" class="form-control" id="inputAnnualSnowfall" th:value="${resort!=null}?${resort.annualSnowfall}">
+                    </div>
+                </div>
+
+                <div class="row my-3 p-3 bg-white rounded shadow-sm input-group">
+                    <h4 class="col-12 my-2">Address</h4>
+                    <div class="col-md-12">
+                        <label for="inputStreet" class="form-label">Street</label>
+                        <input name="address.street" type="text" class="form-control" id="inputStreet" th:value="${resort!=null&&resort.address!=null}?${resort.address.street}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputCity" class="form-label">City</label>
+                        <input name="address.city" type="text" class="form-control" id="inputCity" th:value="${resort!=null&&resort.address!=null}?${resort.address.city}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">State</label>
+                        <select name="address.state" class="form-control" id="inputState">
+                            <option selected disabled value="">Choose a State</option>
+                            <option th:selected="${resort!=null&&resort.address!=null}?${state == resort.address.state}" th:value="${state}" th:each="state:${states}" th:text="${state}">1</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inputZip" class="form-label">Zip</label>
+                        <input name="address.zipCode" type="text" class="form-control" id="inputZip" th:value="${resort!=null&&resort.address!=null}?${resort.address.zipCode}">
+                    </div>
+                </div>
+
+                <div class="row my-3 p-3 bg-white rounded shadow-sm input-group">
+                    <h4 class="col-12 my-2">Mountain Stat</h4>
+                    <div class="col-md-4">
+                        <label for="inputAcres" class="form-label">Skiable Acres</label>
+                        <input name="mountainStat.acres" type="number" class="form-control" id="inputAcres" th:value="${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.acres}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputBaseElevation" class="form-label">Base Elevation</label>
+                        <input name="mountainStat.baseElevation" type="number" class="form-control" id="inputBaseElevation" th:value="${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.baseElevation}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputPeakElevation" class="form-label">Peak Elevation</label>
+                        <input name="mountainStat.peakElevation" type="number" class="form-control" id="inputPeakElevation" th:value="${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.peakElevation}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputNumRuns" class="form-label"># of Runs</label>
+                        <input name="mountainStat.numRuns" type="number" class="form-control" id="inputNumRuns" th:value="${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.numRuns}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputNumLifts" class="form-label"># of Lifts</label>
+                        <input name="mountainStat.numLifts" type="number" class="form-control" id="inputNumLifts" th:value="${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.numLifts}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputNumParks" class="form-label"># of Terrain Parks</label>
+                        <input name="mountainStat.numTerrainParks" type="number" class="form-control" id="inputNumParks" th:value="${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.numTerrainParks}">
+                    </div>
+                    <h6 class="col-12 my-2">Terrain Breakdown</h6>
+                    <div class="col-md-3">
+                        <label for="inputPctBeginner" class="form-label">% of Beginner</label>
+                        <input name="mountainStat.pctBeginnerTerrain" type="number" class="form-control" id="inputPctBeginner" th:value="${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.pctBeginnerTerrain}">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputPctIntermediate" class="form-label">% of Intermediate</label>
+                        <input name="mountainStat.pctIntermediateTerrain" type="number" class="form-control" id="inputPctIntermediate" th:value="${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.pctIntermediateTerrain}">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputPctAdvanced" class="form-label">% of Advanced</label>
+                        <input name="mountainStat.pctAdvancedTerrain" type="number" class="form-control" id="inputPctAdvanced" th:value="${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.pctAdvancedTerrain}">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="inputPctExpert" class="form-label">% of Expert</label>
+                        <input name="mountainStat.pctExpertTerrain" type="number" class="form-control" id="inputPctExpert" th:value="${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.pctExpertTerrain}">
+                    </div>
+                </div>
+
+    <!--            <div class="row align-items-center my-3 p-3 bg-white rounded shadow-sm">-->
+    <!--                <h4 class="col-12 my-2">Operating Time</h4>-->
+    <!--                <div class="row col-12 mx-2" id="timeMon">-->
+    <!--                    <div class="col-4 form-check">-->
+    <!--                        <input class="align-items-center form-check-input" type="checkbox" id="checkMon">-->
+    <!--                        <label class="align-items-center form-check-label" for="checkMon">Mon</label>-->
+    <!--                    </div>-->
+    <!--                    <div class="col-4">-->
+    <!--                        <label for="inputAddress2" class="form-label">From Time</label>-->
+    <!--                        <input type="time" class="form-control" id="inputFromTime" name="inputFromTime" step="600">-->
+    <!--                    </div>-->
+    <!--                    <div class="col-4">-->
+    <!--                        <label for="inputCity" class="form-label">To</label>-->
+    <!--                        <input type="time" class="form-control" id="inputToTime" name="inputFromTime" step="600">-->
+    <!--                    </div>-->
+    <!--                </div>-->
+
+    <!--            </div>-->
+
+
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+            </form>
+        </div>
+
+        <!--   Import Footer   -->
+        <div th:replace="~{partials/footer :: footer(activeUri='resort')}"></div>
+
+    </main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../assets/js/jquery.slim.min.js" th:href="@{/webjars/jquery/3.5.1/jquery.slim.min.js}"><\/script>')</script>
+<script src="../assets/dist/js/bootstrap.bundle.min.js" th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>

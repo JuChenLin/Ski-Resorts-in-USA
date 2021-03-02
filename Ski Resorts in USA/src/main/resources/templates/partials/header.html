@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+</head>
+<body>
+
+<header th:fragment="header" id="header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Ski Resort in USA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample04">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:class="${activeUri=='list'? 'nav-link active' : 'nav-link'}" ref="#" th:href="@{/index}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:class="${activeUri=='favorites'? 'nav-link active' : 'nav-link'}" href="/member" th:href="@{/favorite}">Favorite</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="d-grid gap-2 d-md-flex d-justify-content-md-end">
+                <form class="form-inline my-2 mr-4 my-md-1 mx-md-">
+                    <input class="form-control" type="text" placeholder="Search">
+                    <!--            <span class="fa fa-search form-control-feedback">-->
+                    <!--          <button type="submit"><i class="fa fa-search"></i></button>-->
+                </form>
+                <a href="/login" th:href="@{/login}"><button type="button" class="btn btn-info my-md-1">Login</button></a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+</body>
+</html>

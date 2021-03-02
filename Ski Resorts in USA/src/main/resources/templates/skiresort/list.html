@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.80.0">
+        <title>Ski Resorts in USA</title>
+
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/album/">
+
+        <!-- Bootstrap core CSS -->
+        <link href="../assets/dist/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" rel="stylesheet">
+
+        <style>
+            .bd-placeholder-img {
+              font-size: 1.125rem;
+              text-anchor: middle;
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+            }
+
+            @media (min-width: 768px) {
+              .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+              }
+            }
+
+            .card-text {
+              margin-bottom: 1.5rem;
+            }
+
+            .table {
+                width : 85%;
+                margin-left: 2rem;
+                margin-right: 2rem;
+            }
+
+            tr {
+                line-height: 1.0;
+            }
+
+            .table td, .table th {
+                padding: .5rem;
+            }
+
+
+          </style>
+
+
+        <!-- Custom styles for this template -->
+        <link href="list.css" th:href="@{/asserts/css/list.css}" rel="stylesheet">
+
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!--   Import Top Bar   -->
+        <div th:replace="~{partials/header :: header(activeUri='list')}"></div>
+
+        <main role="main">
+            <!-- Top Large Block -->
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1>Album example</h1>
+                    <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+                    <p>
+                        <a href="/resort" th:href="@{/resort}" class="btn btn-primary my-2">Add Ski Resort</a>
+                        <!--  <a href="#" class="btn btn-secondary my-2">Secondary action</a>  -->
+                    </p>
+                </div>
+            </section>
+
+            <!--  Cards Block  -->
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-4" th:each="resort: ${resorts}">
+                            <div class="card mb-4 shadow-sm">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                    <title>Placeholder</title>
+                                    <rect width="100%" height="100%" fill="#55595c"/>
+<!--                                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">[[${resort.name}]]</text>-->
+                                    <text x="50%" y="50%" fill="#eceeef" dy=".3em"><a href="/detail" th:href="@{/ski-resort/}+${resort.id}">[[${resort.name}]]</a></text>
+                                </svg>
+
+                                <div class="card-body">
+                                    <div class="card-text" id="card-text">
+                                        <table class="table table-borderless text-table">
+                                            <!--    Runs distribution    -->
+                                            <tr class="text-row">
+                                                <td><i class="fas fa-skiing"></i></td>
+<!--                                                <td><img src="asserts/img/ski.png" th:src="@{/asserts/img/ski.png}" alt="" width="15" height="15"></td>-->
+                                                <td>100</td>
+                                            </tr>
+                                            <!--    # of lifts    -->
+                                            <tr class="text-row">
+                                                <td><img src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTEyIDUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnPjxwYXRoIGQ9Im00MTUgNjMuMDAydi00OC4wMDJjMC04LjI4NC02LjcxNi0xNS0xNS0xNXMtMTUgNi43MTYtMTUgMTV2NDguMDAyYzAgOC4yNzEtNi43MjkgMTUtMTUgMTVsLTEyMy0uMDAyYy0yNC40ODQgMC00Ni4yNjIgMTEuNzk2LTU5Ljk1OSAzMGwxODIuOTU5LjAwMmMyNC44MTMgMCA0NS0yMC4xODcgNDUtNDV6Ii8+PHBhdGggZD0ibTM5MCAyOTVoLTI2OGMtMjQuODEzIDAtNDUgMjAuMTg3LTQ1IDQ1djgyLjMxOWgzNTh2LTgyLjMxOWMwLTI0LjgxMy0yMC4xODctNDUtNDUtNDV6Ii8+PHBhdGggZD0ibTY1Ljg1MSA0NTIuMzE5Yy0xLjEyIDAtMi4yMDctLjEzMi0zLjI1Ni0uMzY1LTEuNjc3IDQuNzA3LTIuNTk1IDkuNzctMi41OTUgMTUuMDQ2IDAgMjQuODEzIDIwLjE4NyA0NSA0NSA0NWgzMDJjMjQuODEzIDAgNDUtMjAuMTg3IDQ1LTQ1IDAtNS4xNDEtLjg3OS0xMC4wNzctMi40NzUtMTQuNjhoLTM4My42NzR6Ii8+PHBhdGggZD0ibTQzNyAxMzhoLTM2MmMtNDEuMzU1IDAtNzUgMzMuNjQ1LTc1IDc1djI1NGMwIDguMjg0IDYuNzE2IDE1IDE1IDE1aDE1LjAwM2wtLjAwMy0yNjljMC0yNC44MTMgMjAuMTg3LTQ1IDQ1LTQ1aDM2MmMyNC44MTMgMCA0NSAyMC4xODcgNDUgNDVsLS4wNjQgMjY5aDE1LjA2NGM4LjI4NCAwIDE1LTYuNzE2IDE1LTE1di0yNTRjMC00MS4zNTUtMzMuNjQ1LTc1LTc1LTc1eiIvPjwvZz48L3N2Zz4=" alt="" width="16" height="16"/></td>
+<!--                                                <td><img src="asserts/img/lift.png" th:src="@{/asserts/img/ski-lift3.png}"></td>-->
+                                                <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.numLifts}]] lifts</td>
+                                            </tr>
+                                            <!--    Annual Snowfall    -->
+                                            <tr class="text-row">
+                                                <td><i class="far fa-snowflake"></i></td>
+<!--                                                <td><img src="asserts/img/snow.svg" th:src="@{/asserts/img/snow.svg}" alt=""></i></td>-->
+                                                <td>Annual [[${resort.annualSnowfall}]] "</td>
+                                            </tr>
+                                            <!--    Price Range    -->
+                                            <tr class="text-row">
+                                                <td><i class="fas fa-coins"></i></td>
+                                                <td>[[${resort.priceRange}]]</td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a class="btn btn-sm btn-outline-secondary" th:href="@{/resort/}+${resort.id}">Edit</a>
+<!--                                            <button th:attr="del_uri=@{/resort/}+${resort.id}" class="btn btn-sm btn-outline-danger deleteBtn" type="button">Delete</button>-->
+                                            <form th:action="@{/resort/}+${resort.id}" method="post">
+                                                <input type="hidden" name="_method" value="delete"/>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" >Delete</button>
+                                            </form>
+                                        </div>
+                                        <small class="text-muted">[[${resort.address.state}]]</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!--   Import Footer   -->
+        <div th:replace="~{partials/footer :: footer(activeUri='list')}"></div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/jquery.slim.min.js" th:href="@{/webjars/jquery/3.5.1/jquery.slim.min.js}"><\/script>')</script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js" th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.bundle.min.js}"></script>
+<!--    <script>-->
+<!--		$(".deleteBtn").click(function(){-->
+<!--		    // Delete current ski resort-->
+<!--		    $("#deleteEmpForm").attr("action",$(this).attr("del_uri")).submit();-->
+<!--		    return false;-->
+<!--        });-->
+<!--	</script>-->
+
+    </body>
+</html>
