@@ -1,6 +1,7 @@
-package com.priscilla.web.entities.skiresorts;
+package com.priscilla.web.entity.enumerate;
 
 public enum PriceRange {
+    UNKNOWN,
     LOW,
     MEDIUM,
     HIGH;

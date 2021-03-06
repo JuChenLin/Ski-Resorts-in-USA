@@ -1,20 +1,35 @@
-package com.priscilla.web.entities.skiresorts;
+package com.priscilla.web.entity.skiresort;
 
+import com.priscilla.web.entity.enumerate.State;
+import com.priscilla.web.entity.key.AddressID;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "address")
+@IdClass(AddressID.class)
 public class Address {
-    private State state;
-    private String city;
+
+    @Id
     private String street;
+    @Id
     private Integer zipCode;
 
-    public Address(State state) {
-        this.state = state;
-    }
-    public Address(State state, String city, String street, Integer zipCode) {
-        this(state);
-        this.city = city;
-        this.street = street;
-        this.zipCode = zipCode;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "char(10) default 'UNKNOWN'")
+    private State state = State.UNKNOWN;
+    @Column
+    private String city;
+
+//    public Address(State state) {
+//        this.state = state;
+//    }
+//    public Address(State state, String city, String street, Integer zipCode) {
+//        this(state);
+//        this.city = city;
+//        this.street = street;
+//        this.zipCode = zipCode;
+//    }
 
     public State getState() {
         return state;

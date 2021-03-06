@@ -1,4 +1,4 @@
-package com.priscilla.web.entities.skiresorts;
+package com.priscilla.web.entity.enumerate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +56,8 @@ public enum State {
     WV("West Virginia", "US-WV"),
     WI("Wisconsin", "US-WI"),
     WY("Wyoming", "US-WY"),
-    PR("Puerto Rico", "US-PR");
+    PR("Puerto Rico", "US-PR"),
+    UNKNOWN("Unknown", "Unknown");
 
     private final String nonAbbreviated;
     private final String abbreviationISO;

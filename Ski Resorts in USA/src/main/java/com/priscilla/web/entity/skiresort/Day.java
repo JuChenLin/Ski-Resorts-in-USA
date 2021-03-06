@@ -1,4 +1,4 @@
-package com.priscilla.web.entities.skiresorts;
+package com.priscilla.web.entity.skiresort;
 
 public enum Day {
     SUNDAY("Sunday", "Sun"),

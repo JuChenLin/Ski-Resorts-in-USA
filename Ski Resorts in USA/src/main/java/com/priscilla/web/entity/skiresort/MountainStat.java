@@ -1,19 +1,39 @@
-package com.priscilla.web.entities.skiresorts;
+package com.priscilla.web.entity.skiresort;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "mountain_stat")
 public class MountainStat {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "int(6) ZEROFILL")
+    private Integer id;
+
+    @Column
     private Integer acres;
+    @Column
     private Integer peakElevation;
+    @Column
     private Integer baseElevation;
+    @Column
     private Integer numRuns;
+    @Column
     private Integer numLifts;
+    @Column
     private Integer numTerrainParks;
+    @Column
     private Integer pctBeginnerTerrain;
+    @Column
     private Integer pctIntermediateTerrain;
+    @Column
     private Integer pctAdvancedTerrain;
+    @Column
     private Integer pctExpertTerrain;
 
-    private boolean nightSkiing;
-    private boolean freeKidsSkiing;
+//    private boolean nightSkiing;
+//    private boolean freeKidsSkiing;
 
     public Integer getAcres() {
         return acres;
@@ -95,19 +115,19 @@ public class MountainStat {
         this.pctExpertTerrain = pctExpertTerrain;
     }
 
-    public boolean isNightSkiing() {
-        return nightSkiing;
-    }
-
-    public void setNightSkiing(boolean nightSkiing) {
-        this.nightSkiing = nightSkiing;
-    }
-
-    public boolean isFreeKidsSkiing() {
-        return freeKidsSkiing;
-    }
-
-    public void setFreeKidsSkiing(boolean freeKidsSkiing) {
-        this.freeKidsSkiing = freeKidsSkiing;
-    }
+//    public boolean isNightSkiing() {
+//        return nightSkiing;
+//    }
+//
+//    public void setNightSkiing(boolean nightSkiing) {
+//        this.nightSkiing = nightSkiing;
+//    }
+//
+//    public boolean isFreeKidsSkiing() {
+//        return freeKidsSkiing;
+//    }
+//
+//    public void setFreeKidsSkiing(boolean freeKidsSkiing) {
+//        this.freeKidsSkiing = freeKidsSkiing;
+//    }
 }

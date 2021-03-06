@@ -1,4 +1,4 @@
-package com.priscilla.web.entities.skiresorts;
+package com.priscilla.web.entity.skiresort;
 
 import org.springframework.stereotype.Component;
 
