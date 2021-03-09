@@ -1,17 +1,23 @@
 package com.priscilla.web.entity.skiresort;
 
 import com.priscilla.web.entity.enumerate.PriceRange;
+import org.hibernate.annotations.ResultCheckStyle;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 
 @Entity
+@SQLDelete(sql = "UPDATE ski_resort SET deleted = true WHERE id = ?", check = ResultCheckStyle.COUNT)
 @Table(name = "ski_resort")
 public class SkiResort {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "int(6) ZEROFILL")
+    @Column(columnDefinition = "int(6) ZEROFILL", updatable = false, nullable = false)
     private Integer id;
+
+    @Column(name = "deleted", nullable = false, columnDefinition = "boolean default false")
+    private Boolean isDeleted = false;
 
     @Column(nullable = false, columnDefinition = "char(50)")
     private String name;
@@ -22,8 +28,8 @@ public class SkiResort {
     @Column(columnDefinition = "char(10) default 'UNKNOWN'")
     private PriceRange priceRange = PriceRange.UNKNOWN;
 
-    @Column(length = 10, columnDefinition = "char(10) default 'UNKNOWN'")
-    private String annualSnowfall = "UNKNOWN";
+    @Column(columnDefinition = "int(4) default -1")
+    private Integer annualSnowfall = -1;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_street", referencedColumnName = "street")
@@ -36,6 +42,19 @@ public class SkiResort {
     @JoinColumn(name = "mountain_stat_id", referencedColumnName = "id")
     private MountainStat mountainStat;
 
+    public SkiResort() {
+
+    }
+
+    public SkiResort(SkiResort skiResort) {
+//        this.isDeleted = skiResort.isDeleted;
+        this.name = skiResort.name;
+        this.website = skiResort.website;
+        this.priceRange = skiResort.priceRange;
+        this.annualSnowfall = skiResort.annualSnowfall;
+        this.address = skiResort.address;
+        this.mountainStat = skiResort.mountainStat;
+    }
 
 //    public SkiResort(String id, String name, String website, State state, PriceRange priceRange) {
 //        this.id = id;
@@ -61,8 +80,12 @@ public class SkiResort {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.isDeleted = deleted;
     }
 
     public String getName() {
@@ -89,11 +112,11 @@ public class SkiResort {
         this.priceRange = priceRange;
     }
 
-    public String getAnnualSnowfall() {
+    public Integer getAnnualSnowfall() {
         return annualSnowfall;
     }
 
-    public void setAnnualSnowfall(String annualSnowfall) {
+    public void setAnnualSnowfall(Integer annualSnowfall) {
         this.annualSnowfall = annualSnowfall;
     }
 
@@ -143,4 +166,14 @@ public class SkiResort {
 //                ", annualSnowfall=" + annualSnowfall +
 //                '}';
 //    }
+
+    public void setAll(SkiResort request) {
+        this.setDeleted(request.getDeleted());
+        this.setName(request.getName());
+        this.setWebsite(request.getWebsite());
+        this.setPriceRange(request.getPriceRange());
+        this.setAnnualSnowfall(request.getAnnualSnowfall());
+        this.setAddress(request.getAddress());
+        this.setAnnualSnowfall(request.getAnnualSnowfall());
+    }
 }
