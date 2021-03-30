@@ -6,12 +6,15 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.80.0">
+
     <title>Ski Resorts in USA - Login</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/sign-in/">
+    <link href="https://getbootstrap.com/docs/4.6/examples/sign-in/" rel="canonical">
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/dist/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="signin.css" th:href="@{/asserts/css/signin.css}" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -29,16 +32,11 @@
         }
       }
     </style>
-
-    
-    <!-- Custom styles for this template -->
-    <link href="signin.css" th:href="@{/asserts/css/signin.css}" rel="stylesheet">
   </head>
 
   <body class="text-center">
-<!--    &lt;!&ndash;   Import Top Bar   &ndash;&gt;-->
+    <!--   Import Top Bar   -->
 <!--    <div th:replace="~{partials/header :: header}"></div>-->
-    <main>
       <form class="form-signin" action="member.html" th:action="@{/user/login}" method="post">
         <img class="mb-4" src="../assets/brand/bootstrap-solid.svg" th:src="@{/asserts/img/bootstrap-solid.svg}" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
@@ -58,6 +56,5 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2021</p>
       </form>
-    </main>
   </body>
 </html>

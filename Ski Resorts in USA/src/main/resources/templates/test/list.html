@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+    <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -75,7 +75,7 @@
                     <h1>Album example</h1>
                     <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
                     <p>
-                        <a href="/resort" th:href="@{/ski-resorts/edit}" class="btn btn-primary my-2">Add Ski Resort</a>
+                        <a href="/resort" th:href="@{/test/resort}" class="btn btn-primary my-2">Add Ski Resort</a>
                         <!--  <a href="#" class="btn btn-secondary my-2">Secondary action</a>  -->
                     </p>
                 </div>
@@ -92,7 +92,7 @@
                                     <title>Placeholder</title>
                                     <rect width="100%" height="100%" fill="#55595c"/>
 <!--                                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">[[${resort.name}]]</text>-->
-                                    <text x="50%" y="50%" fill="#eceeef" dy=".3em"><a href="/detail" th:href="@{/ski-resorts/}+${resort.id}">[[${resort.name}]]</a></text>
+                                    <text x="50%" y="50%" fill="#eceeef" dy=".3em"><a href="/detail" th:href="@{/ski-resort/}+${resort.id}">[[${resort.name}]]</a></text>
                                 </svg>
 
                                 <div class="card-body">
@@ -102,7 +102,7 @@
                                             <tr class="text-row">
                                                 <td><i class="fas fa-skiing"></i></td>
 <!--                                                <td><img src="asserts/img/ski.png" th:src="@{/asserts/img/ski.png}" alt="" width="15" height="15"></td>-->
-                                                <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.numRuns}]] runs</td>
+                                                <td>100</td>
                                             </tr>
                                             <!--    # of lifts    -->
                                             <tr class="text-row">
@@ -126,14 +126,14 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <a class="btn btn-sm btn-outline-secondary" th:href="@{/ski-resorts/edit/}+${resort.id}">Edit</a>
+                                            <a class="btn btn-sm btn-outline-secondary" th:href="@{/resort/}+${resort.id}">Edit</a>
 <!--                                            <button th:attr="del_uri=@{/resort/}+${resort.id}" class="btn btn-sm btn-outline-danger deleteBtn" type="button">Delete</button>-->
-                                            <form th:action="@{/ski-resorts/}+${resort.id}" method="post">
+                                            <form th:action="@{/resort/}+${resort.id}" method="post">
                                                 <input type="hidden" name="_method" value="delete"/>
                                                 <button type="submit" class="btn btn-sm btn-outline-danger" >Delete</button>
                                             </form>
                                         </div>
-                                        <small class="text-muted">[[${resort!=null&&resort.addresses!=null&&#arrays.length(resort.addresses)>0}?${resort.addresses[0].state}]]</small>
+                                        <small class="text-muted">[[${resort.address.state}]]</small>
                                     </div>
                                 </div>
                             </div>
