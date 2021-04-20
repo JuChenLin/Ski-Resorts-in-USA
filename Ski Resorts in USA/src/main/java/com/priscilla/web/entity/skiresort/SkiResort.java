@@ -1,80 +1,82 @@
 package com.priscilla.web.entity.skiresort;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.priscilla.web.entity.enumerate.PriceRange;
-import org.hibernate.annotations.ResultCheckStyle;
-import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
-@SQLDelete(sql = "UPDATE ski_resort SET deleted = true WHERE id = ?", check = ResultCheckStyle.COUNT)
 @Table(name = "ski_resort")
+//@NamedQuery(name = "SkiResort.findAllOrderedById”, query = “SELECT ski_resort FROM SkiResort ski_resort WHERE name like :name")
+@SQLDelete(sql = "UPDATE ski_resort SET deleted = true WHERE id = ?", check = ResultCheckStyle.COUNT)
+@Where(clause = "deleted <> true")
 public class SkiResort {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "int(6) ZEROFILL", updatable = false, nullable = false)
+    @Column(nullable = false, updatable = false, columnDefinition = "int(6) ZEROFILL")
     private Integer id;
 
     @Column(name = "deleted", nullable = false, columnDefinition = "boolean default false")
     private Boolean isDeleted = false;
 
+    @NotNull(message="ski resort name is required")
     @Column(nullable = false, columnDefinition = "char(50)")
     private String name;
     @Column(nullable = false, columnDefinition = "char(100)")
     private String website;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "char(10) default 'UNKNOWN'")
-    private PriceRange priceRange = PriceRange.UNKNOWN;
+    @Column
+    private PriceRange priceRange;
 
-    @Column(columnDefinition = "int(4) default -1")
-    private Integer annualSnowfall = -1;
+    @Column(columnDefinition = "int(4)")
+    private Integer annualSnowfall;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_street", referencedColumnName = "street")
-    @JoinColumn(name = "address_zipcode", referencedColumnName = "zipCode")
-    private Address address;
-//    private Map<String, Address> addressMap;
-//    private OperatingTime operatingTime;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mountain_stat_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "skiResort", cascade = CascadeType.ALL)
+//    @PrimaryKeyJoinColumn
     private MountainStat mountainStat;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "address_street", referencedColumnName = "street")
+//    @JoinColumn(name = "address_zipcode", referencedColumnName = "zipCode")
+//    private Address address;
+
+    @OneToMany(mappedBy = "skiResort", cascade = CascadeType.ALL)
+//    @PrimaryKeyJoinColumn
+    private List<Address> addresses;
+//    private OperatingTime operatingTime;
 
     public SkiResort() {
 
     }
 
+    public SkiResort(String name, String website, PriceRange priceRange, Integer annualSnowfall) {
+        this.name = name;
+        this.website = website;
+        this.priceRange = priceRange;
+        this.annualSnowfall = annualSnowfall;
+    }
+
+    // Copy Constructor
     public SkiResort(SkiResort skiResort) {
-//        this.isDeleted = skiResort.isDeleted;
         this.name = skiResort.name;
         this.website = skiResort.website;
         this.priceRange = skiResort.priceRange;
         this.annualSnowfall = skiResort.annualSnowfall;
-        this.address = skiResort.address;
         this.mountainStat = skiResort.mountainStat;
+        this.addresses = skiResort.addresses;
     }
 
-//    public SkiResort(String id, String name, String website, State state, PriceRange priceRange) {
-//        this.id = id;
-//        this.name = name;
-//        this.website = website;
-//        this.priceRange = priceRange;
-//        this.address = new Address(state);
-//
-//        this.annualSnowfall = null;
-//        this.mountainStat = new MountainStat();
-//    }
-
-//    public SkiResort(String id, String name, String website, State state, PriceRange priceRange) {
-//        this(id, name, website, state, priceRange);
-//
-//        this.annualSnowfall = null;
-//        this.mountainStat = new MountainStat();
-////        this.addresses = new HashMap<String, Address>();
-////        this.operatingTime = operatingTime;
-//    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;
@@ -120,30 +122,6 @@ public class SkiResort {
         this.annualSnowfall = annualSnowfall;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address addressMap) {
-        this.address = address;
-    }
-
-//    public Map<String, Address> getAddressMap() {
-//        return addressMap;
-//    }
-//
-//    public void setAddressMap(Map<String, Address> addressMap) {
-//        this.addressMap = addressMap;
-//    }
-
-////    public OperatingTime getOperatingTime() {
-////        return operatingTime;
-////    }
-////
-////    public void setOperatingTime(OperatingTime operatingTime) {
-////        this.operatingTime = operatingTime;
-////    }
-//
     public MountainStat getMountainStat() {
         return mountainStat;
     }
@@ -152,20 +130,47 @@ public class SkiResort {
         this.mountainStat = mountainStat;
     }
 
-//
-//    @Override
-//    public String toString() {
-//        return "SkiResort{" +
-//                "id='" + id + '\'' +
-//                ", name='" + name + '\'' +
-//                ", website='" + website + '\'' +
-//                ", priceRange=" + priceRange +
-//                ", addresses=" + address +
-////                ", operatingTime=" + operatingTime +
-//                ", mountainStat=" + mountainStat +
-//                ", annualSnowfall=" + annualSnowfall +
-//                '}';
+//    public Address getAddress() {
+//        return address;
 //    }
+//
+//    public void setAddress(Address addressMap) {
+//        this.address = address;
+//    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public void addAddress(Address address) {
+        this.addresses.add(address);
+    }
+
+//    public OperatingTime getOperatingTime() {
+//        return operatingTime;
+//    }
+//
+//    public void setOperatingTime(OperatingTime operatingTime) {
+//        this.operatingTime = operatingTime;
+//    }
+
+    @Override
+    public String toString() {
+        return "SkiResort{" +
+                "id=" + id +
+                ", isDeleted=" + isDeleted +
+                ", name='" + name + '\'' +
+                ", website='" + website + '\'' +
+                ", priceRange=" + priceRange +
+                ", annualSnowfall=" + annualSnowfall +
+                ", mountainStat=" + mountainStat +
+                ", addresses=" + addresses +
+                "}";
+    }
 
     public void setAll(SkiResort request) {
         this.setDeleted(request.getDeleted());
@@ -173,7 +178,7 @@ public class SkiResort {
         this.setWebsite(request.getWebsite());
         this.setPriceRange(request.getPriceRange());
         this.setAnnualSnowfall(request.getAnnualSnowfall());
-        this.setAddress(request.getAddress());
-        this.setAnnualSnowfall(request.getAnnualSnowfall());
+        this.setMountainStat(request.getMountainStat());
+        this.setAddresses(request.getAddresses());
     }
 }
