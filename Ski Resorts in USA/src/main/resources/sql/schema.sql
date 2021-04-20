@@ -1,0 +1,6 @@
+--CREATE TABLE ski_resort (
+--    id   INTEGER(8)   NOT NULL AUTO_INCREMENT,
+--    name VARCHAR(128) NOT NULL,
+--    website VARCHAR(128) NOT NULL,
+--    PRIMARY KEY (id)
+--);
