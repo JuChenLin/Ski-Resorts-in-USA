@@ -1,6 +1,6 @@
 package com.priscilla.web;
 
-import com.priscilla.web.entities.skiresorts.DayOpeningTime;
+import com.priscilla.web.entity.skiresort.DayOpeningTime;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

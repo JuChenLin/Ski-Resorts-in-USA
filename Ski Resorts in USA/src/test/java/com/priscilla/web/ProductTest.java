@@ -1,6 +1,5 @@
-package com.priscilla.web.repository;
+package com.priscilla.web;
 
-import com.priscilla.web.entity.skiresort.SkiResort;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +14,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 
-//@RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SkiResortRepositoryTest {
+public class ProductTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -31,37 +29,22 @@ public class SkiResortRepositoryTest {
         httpHeaders.add("Content-Type", "application/json");
 
         JSONObject request = new JSONObject();
-        request.put("name", "Ski Resort 01");
-        request.put("website", "www.skiresort01.com");
-        request.put("priceRange", "LOW");
-        request.put("annualSnowfall", 130);
+        request.put("name", "Harry Potter");
+        request.put("price", 450);
 
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/ski-resorts")
-                                                              .headers(httpHeaders)
-                                                              .content(request.toString());
+        RequestBuilder requestBuilder =
+                MockMvcRequestBuilders
+                        .post("/products")
+                        .headers(httpHeaders)
+                        .content(request.toString());
 
         mockMvc.perform(requestBuilder)
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").hasJsonPath())
                 .andExpect(jsonPath("$.name").value(request.getString("name")))
-                .andExpect(jsonPath("$.website").value(request.getString("website")))
-                .andExpect(jsonPath("$.priceRange").value(request.getString("priceRange")))
-                .andExpect(jsonPath("$.annualSnowfall").value(request.getInt("annualSnowfall")))
-//                .andExpect(header().exists("Location"))
-                .andExpect(header().string("Content-Type", "application/json"));
+                .andExpect(jsonPath("$.price").value(request.getInt("price")))
+                .andExpect(header().exists("Location"))
+                .andExpect(header().string("Content-Type", "application/json;charset=UTF-8"));
     }
-
-//    @Autowired
-//    SkiResort skiResort;
-//    @Autowired
-//    SkiResortRepository skiResortRepository;
-//
-//
-//    @Test
-//    public void getSkiResort() {
-//        Optional<SkiResort> optionalSkiResort = skiResortRepository.findById(000001);
-//    }
-
-
 }
