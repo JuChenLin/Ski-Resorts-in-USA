@@ -3,10 +3,11 @@ package com.priscilla.web.repository;
 import com.priscilla.web.entity.skiresort.SkiResort;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
+@Repository
 public interface SkiResortRepository extends JpaRepository<SkiResort, Integer> {
 
     // Select All
