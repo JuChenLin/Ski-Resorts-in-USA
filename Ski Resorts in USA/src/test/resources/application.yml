@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.1.124:3307/Mock
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      # create or update database table
+#      ddl-auto: update
+      ddl-auto: create
+      # show SQL
+#    show-sql: true
+
+
+
