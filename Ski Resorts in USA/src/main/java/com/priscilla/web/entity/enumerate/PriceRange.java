@@ -1,8 +1,13 @@
 package com.priscilla.web.entity.enumerate;
 
 public enum PriceRange {
-    UNKNOWN,
-    LOW,
-    MEDIUM,
-    HIGH;
+    LOW(),
+    MEDIUM(),
+    HIGH();
+
+//    private final String range;
+//
+//    PriceRange(String range) {
+//        this.range = range;
+//    }
 }
