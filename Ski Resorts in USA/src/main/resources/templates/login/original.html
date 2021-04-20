@@ -37,6 +37,10 @@
   <body class="text-center">
     <!--   Import Top Bar   -->
 <!--    <div th:replace="~{partials/header :: header}"></div>-->
+    <h3>Login with:</h3>
+    <p th:each="url : ${urls}">
+      <a th:text="${url.key}" th:href="${url.value}">Client</a>
+    </p>
       <form class="form-signin" action="member.html" th:action="@{/user/login}" method="post">
         <img class="mb-4" src="../assets/brand/bootstrap-solid.svg" th:src="@{/asserts/img/bootstrap-solid.svg}" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
@@ -56,5 +60,9 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2021</p>
       </form>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/jquery.slim.min.js" th:href="@{/webjars/jquery/3.5.1/jquery.slim.min.js}"><\/script>')</script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js" th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.bundle.min.js}"></script>
   </body>
 </html>
