@@ -56,8 +56,7 @@ public enum State {
     WV("West Virginia", "US-WV"),
     WI("Wisconsin", "US-WI"),
     WY("Wyoming", "US-WY"),
-    PR("Puerto Rico", "US-PR"),
-    UNKNOWN("Unknown", "Unknown");
+    PR("Puerto Rico", "US-PR");
 
     private final String nonAbbreviated;
     private final String abbreviationISO;
