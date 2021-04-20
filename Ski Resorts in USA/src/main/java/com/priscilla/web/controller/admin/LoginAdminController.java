@@ -1,6 +1,7 @@
-package com.priscilla.web.controller;
+package com.priscilla.web.controller.admin;
 
 //import com.priscilla.web.repository.UserRepository;
+
 import com.priscilla.web.concrete.AddModelAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ResolvableType;
@@ -10,32 +11,15 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping
-public class LoginController {
-
-//    @PostMapping(value = "/user/login")
-//    public String login(@RequestParam("email") String user,
-//                        @RequestParam("password") String password,
-//                        Map<String, Object> map,
-//                        HttpSession session) {
-//        session.setAttribute("loginUser", user);
-//
-//        if (!StringUtils.isEmpty(user) && password.equals("admin")) {
-//            return "redirect:/resorts";
-////            return "redirect:/favorite";
-//        } else {
-//
-//            map.put("msg", "username or password not correct");
-//            return "login";
-//
-//        }
-//    }
+@RequestMapping(value = "/admin")
+public class LoginAdminController {
 
     @Autowired
     private ClientRegistrationRepository clientRegistrationRepository;
