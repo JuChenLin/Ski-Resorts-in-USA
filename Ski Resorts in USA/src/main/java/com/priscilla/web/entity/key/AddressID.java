@@ -6,12 +6,13 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class AddressID implements Serializable {
-    private String street;
     private Integer zipCode;
+    private String street;
 
-    public AddressID(String street, Integer zipCode) {
-        this.street = street;
+    public AddressID() {}
+    public AddressID(Integer zipCode, String street) {
         this.zipCode = zipCode;
+        this.street = street;
     }
 
     @Override
@@ -19,11 +20,11 @@ public class AddressID implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AddressID that = (AddressID) o;
-        return street.equals(that.street) && zipCode.equals(that.zipCode);
+        return zipCode.equals(that.zipCode) && street.equals(that.street);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(street, zipCode);
+        return Objects.hash(zipCode, street);
     }
 }
