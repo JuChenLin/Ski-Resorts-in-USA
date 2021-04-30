@@ -1,4 +1,4 @@
-package com.priscilla.web.controller;
+package com.priscilla.web.controller.archived;
 
 import com.priscilla.web.entity.enumerate.PriceRange;
 import com.priscilla.web.entity.enumerate.State;
@@ -15,13 +15,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/ski-resorts-html")
 public class SkiResortsControllerHTML {
 
     @Autowired
     private SkiResortRepository skiResortRepository;
 
 //     Get all ski resorts, go to list page
-    @GetMapping(value={"/", "/index", "resorts"})
+//    @GetMapping(value={"/", "/index", "resorts"})
+    @GetMapping
     public String list(Model model) {
         List<SkiResort> listSkiResort = skiResortRepository.findAll();
         model.addAttribute("resorts", listSkiResort);
@@ -30,7 +32,7 @@ public class SkiResortsControllerHTML {
     }
 
 //     Go to ski resort editing page
-    @GetMapping("/resort")
+    @GetMapping("/edit")
     public String toEditPage(Model model) {
         model.addAttribute("states", State.values());
         model.addAttribute("priceRanges", PriceRange.values());
@@ -38,7 +40,7 @@ public class SkiResortsControllerHTML {
     }
 
 //     Save ski resort info
-    @PostMapping("/resort")
+    @PostMapping
     public String addSkiResort(SkiResort skiResort) {
         System.out.println("Add ski resort: " + skiResort);
 

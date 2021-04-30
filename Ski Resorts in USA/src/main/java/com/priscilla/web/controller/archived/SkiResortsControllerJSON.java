@@ -1,4 +1,4 @@
-package com.priscilla.web.controller;
+package com.priscilla.web.controller.archived;
 
 import com.priscilla.web.entity.enumerate.PriceRange;
 import com.priscilla.web.entity.enumerate.State;
