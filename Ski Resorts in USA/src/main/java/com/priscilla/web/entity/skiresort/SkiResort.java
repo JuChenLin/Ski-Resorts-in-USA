@@ -43,14 +43,14 @@ public class SkiResort {
 //    @PrimaryKeyJoinColumn
     private MountainStat mountainStat;
 
-//    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "skiResort", cascade = CascadeType.ALL)
 //    @JoinColumn(name = "address_street", referencedColumnName = "street")
 //    @JoinColumn(name = "address_zipcode", referencedColumnName = "zipCode")
-//    private Address address;
+    private Address address;
 
-    @OneToMany(mappedBy = "skiResort", cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "skiResort", cascade = CascadeType.ALL)
 //    @PrimaryKeyJoinColumn
-    private List<Address> addresses;
+//    private List<Address> addresses;
 //    private OperatingTime operatingTime;
 
     public SkiResort() {
@@ -71,7 +71,7 @@ public class SkiResort {
         this.priceRange = skiResort.priceRange;
         this.annualSnowfall = skiResort.annualSnowfall;
         this.mountainStat = skiResort.mountainStat;
-        this.addresses = skiResort.addresses;
+        this.address = skiResort.address;
     }
 
     public void setId(Integer id) {
@@ -138,17 +138,14 @@ public class SkiResort {
 //        this.address = address;
 //    }
 
-    public List<Address> getAddresses() {
-        return addresses;
+    public Address getAddresses() {
+        return address;
     }
 
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
+    public void setAddresses(Address addresses) {
+        this.address = address;
     }
 
-    public void addAddress(Address address) {
-        this.addresses.add(address);
-    }
 
 //    public OperatingTime getOperatingTime() {
 //        return operatingTime;
@@ -168,7 +165,6 @@ public class SkiResort {
                 ", priceRange=" + priceRange +
                 ", annualSnowfall=" + annualSnowfall +
                 ", mountainStat=" + mountainStat +
-                ", addresses=" + addresses +
                 "}";
     }
 
