@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: ski-resorts-in-usa
+
+  # ===============================
+  # = JDBC Mysql configurations
+  # ===============================
+  datasource:
+    url: jdbc:mysql://localhost:3307/Dev
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+    data:
+      - classpath:sql/data-ski_resort.sql
+
+  # ===============================
+  # = Redis configurations
+  # ===============================ß
+  redis:
+    host: localhost
+    port: 6379
+
+  # ===============================
+  # = JPA configurations
+  # ===============================
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+#      ddl-auto: update
+#      ddl-auto: none
+
+  # ===============================
+  # = Security configurations
+  # ===============================
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 228753016775-dt2oe03o95sfs74fbqafqi367nqadj6s.apps.googleusercontent.com
+            client-secret: AxEkrffUzy7AXe5TtoxzmZMG
+            scope:
+              - openid
+              - email
+              - profile
+          facebook:
+            client-id: 2845073222403042
+            client-secret: dded9fd72db071fb827592f7fd29c916
+
+# ===============================
+# = Logging configurations
+# ===============================
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type: TRACE
+
+
+
+
