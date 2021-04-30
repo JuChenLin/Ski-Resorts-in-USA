@@ -10,28 +10,8 @@ import java.util.Map;
 @RequestMapping
 public class MainController {
 
-    @RequestMapping({"/","/index.html"})
+    @RequestMapping({"/","/index"})
     public String index() {
         return "redirect:/ski-resorts";
     }
-
-//    @ResponseBody
-//    @RequestMapping("/hello")
-//    public  String hello(){
-//        return "Hello World";
-//    }
-
-//    @RequestMapping("/hello")
-//    public @ResponseBody
-//    String greeting() {
-//        return "Hello, World";
-//    }
-//
-//    @RequestMapping("/success")
-//    public String success(Map<String,Object> map) {
-//        map.put("hello", "Hello");
-//        //classpath:/templates/success.html
-//        return "success";
-//    }
-
 }
