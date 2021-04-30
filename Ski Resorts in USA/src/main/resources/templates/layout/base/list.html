@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+
+    <title>Ski Resorts in USA</title>
+
+    <base href="/"/>
+    <!-- CSS -->
+    <link type="text/css" href="/assets/css/common/footer.css" th:href="@{/assets/css/common/footer.css}" rel="stylesheet">
+    <link type="text/css" href="/assets/css/list.css" th:href="@{/assets/css/list.css}" rel="stylesheet">
+    <link type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>-->
+
+    <style th:inline="text">
+        section {
+            background: url('[[@{/assets/img/mountain.jpg}]]') no-repeat center center;
+            background-size: 100% auto;
+        }
+    </style>
+</head>
+<body>
+    <!--   Header Bar   -->
+    <div th:replace="~{layout/common/header :: header(activeUri='list')}"></div>
+
+
+    <main role="main">
+        <!--  Top : Large Image  -->
+        <div th:replace="~{layout/content/list :: top}"></div>
+
+        <!--  Main: Cards Block  -->
+        <div th:replace="~{layout/content/list :: central}"></div>
+
+    </main>
+
+<!--   Footer   -->
+<div th:replace="~{layout/common/footer :: footer(activeUri='list')}"></div>
+
+
+</body>
+</html>

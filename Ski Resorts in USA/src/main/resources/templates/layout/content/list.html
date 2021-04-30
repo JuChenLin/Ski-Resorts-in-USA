@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <title>List</title>
+</head>
+<body>
+    <main role="main">
+        <!-- Top : Large Image -->
+        <section th:fragment="top" class="jumbotron text-center">
+            <div class="container top-text">
+            </div>
+        </section>
+
+        <!--  Main: Cards Block  -->
+        <div th:fragment="central" class="album py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4" th:each="resort: ${resorts}">
+                        <div class="card mb-4 shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#55595c"/>
+                                <!--                                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">[[${resort.name}]]</text>-->
+                                <text x="50%" y="50%" fill="#eceeef" dy=".3em"><a href="/detail" th:href="@{/ski-resorts/}+${resort.id}">[[${resort.name}]]</a></text>
+                            </svg>
+
+                            <div class="card-body" style="padding:1rem 15%">
+                                <div class="card-text">
+                                    <table class="table table-borderless text-table" style="width:100%;">
+                                        <col style="width:45%">
+                                        <col style="width:55%">
+                                        <!--    Runs distribution    -->
+                                        <tr class="text-row" style="width:auto;">
+                                            <td><i class="fas fa-skiing"></i></td>
+                                            <!--                                                <td><img src="asserts/img/ski.png" th:src="@{/asserts/img/ski.png}" alt="" width="15" height="15"></td>-->
+                                            <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.numRuns}]] runs</td>
+                                        </tr>
+                                        <!--    # of lifts    -->
+                                        <tr class="text-row">
+                                            <td><img src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTEyIDUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnPjxwYXRoIGQ9Im00MTUgNjMuMDAydi00OC4wMDJjMC04LjI4NC02LjcxNi0xNS0xNS0xNXMtMTUgNi43MTYtMTUgMTV2NDguMDAyYzAgOC4yNzEtNi43MjkgMTUtMTUgMTVsLTEyMy0uMDAyYy0yNC40ODQgMC00Ni4yNjIgMTEuNzk2LTU5Ljk1OSAzMGwxODIuOTU5LjAwMmMyNC44MTMgMCA0NS0yMC4xODcgNDUtNDV6Ii8+PHBhdGggZD0ibTM5MCAyOTVoLTI2OGMtMjQuODEzIDAtNDUgMjAuMTg3LTQ1IDQ1djgyLjMxOWgzNTh2LTgyLjMxOWMwLTI0LjgxMy0yMC4xODctNDUtNDUtNDV6Ii8+PHBhdGggZD0ibTY1Ljg1MSA0NTIuMzE5Yy0xLjEyIDAtMi4yMDctLjEzMi0zLjI1Ni0uMzY1LTEuNjc3IDQuNzA3LTIuNTk1IDkuNzctMi41OTUgMTUuMDQ2IDAgMjQuODEzIDIwLjE4NyA0NSA0NSA0NWgzMDJjMjQuODEzIDAgNDUtMjAuMTg3IDQ1LTQ1IDAtNS4xNDEtLjg3OS0xMC4wNzctMi40NzUtMTQuNjhoLTM4My42NzR6Ii8+PHBhdGggZD0ibTQzNyAxMzhoLTM2MmMtNDEuMzU1IDAtNzUgMzMuNjQ1LTc1IDc1djI1NGMwIDguMjg0IDYuNzE2IDE1IDE1IDE1aDE1LjAwM2wtLjAwMy0yNjljMC0yNC44MTMgMjAuMTg3LTQ1IDQ1LTQ1aDM2MmMyNC44MTMgMCA0NSAyMC4xODcgNDUgNDVsLS4wNjQgMjY5aDE1LjA2NGM4LjI4NCAwIDE1LTYuNzE2IDE1LTE1di0yNTRjMC00MS4zNTUtMzMuNjQ1LTc1LTc1LTc1eiIvPjwvZz48L3N2Zz4=" alt="" width="16" height="16"/></td>
+                                            <!--                                                <td><img src="asserts/img/lift.png" th:src="@{/asserts/img/ski-lift3.png}"></td>-->
+                                            <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.numLifts}]] lifts</td>
+                                        </tr>
+                                        <!--    Annual Snowfall    -->
+                                        <tr class="text-row">
+                                            <td><i class="far fa-snowflake"></i></td>
+                                            <!--                                                <td><img src="asserts/img/snow.svg" th:src="@{/asserts/img/snow.svg}" alt=""></i></td>-->
+                                            <td>Annual [[${resort.annualSnowfall}]] "</td>
+                                        </tr>
+                                        <!--    Price Range    -->
+                                        <tr class="text-row">
+                                            <td><i class="fas fa-coins"></i></td>
+                                            <td>[[${resort.priceRange}]]</td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!--                                        <div class="btn-toolbar">-->
+                                    <form sec:authorize="isAuthenticated()" th:action="@{/my-favorites/}+${resort.id}" method="post" class="mx-3">
+                                        <input type="hidden" name="_method" value="put"/>
+                                        <!--                                                <input type="hidden" th:value="${resort.id}"/>-->
+                                        <button type="submit" class="btn btn-sm btn-danger my-md-1 like" style="background-color:LightCoral; border-color:LightCoral;"><i class="far fa-heart fa-md"></i></button>
+                                    </form>
+                                    <a sec:authorize="!isAuthenticated()" class="btn btn-sm btn-danger like" th:href="@{/login}" style="background-color:LightCoral; border-color:LightCoral;"><i class="far fa-heart fa-md"></i></a>
+
+                                    <!--                                            <div class="btn-group my-auto" sec:authorize="isAuthenticated()">-->
+                                    <!--                                                <a class="btn btn-sm btn-outline-secondary" th:href="@{/ski-resort/edit/}+${resort.id}">Edit</a>-->
+                                    <!--                                                &lt;!&ndash;                                            <button th:attr="del_uri=@{/resort/}+${resort.id}" class="btn btn-sm btn-outline-danger deleteBtn" type="button">Delete</button>&ndash;&gt;-->
+                                    <!--                                                <form th:action="@{/ski-resort/}+${resort.id}" method="post">-->
+                                    <!--                                                    <input type="hidden" name="_method" value="delete"/>-->
+                                    <!--                                                    <button type="submit" class="btn btn-sm btn-outline-danger" >Delete</button>-->
+                                    <!--                                                </form>-->
+                                    <!--                                            </div>-->
+
+
+                                    <!--                                        </div>-->
+                                    <small class="text-muted">[[${resort!=null&&resort.addresses!=null&&#arrays.length(resort.addresses)>0}?${resort.addresses[0].state}]]</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<!--    <script>-->
+<!--		$(".deleteBtn").click(function(){-->
+<!--		    // Delete current ski resort-->
+<!--		    $("#deleteEmpForm").attr("action",$(this).attr("del_uri")).submit();-->
+<!--		    return false;-->
+<!--        });-->
+<!--	</script>-->
+
+</body>
+</html>
