@@ -138,11 +138,11 @@ public class SkiResort {
 //        this.address = address;
 //    }
 
-    public Address getAddresses() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddresses(Address addresses) {
+    public void setAddress(Address addresses) {
         this.address = address;
     }
 
@@ -175,6 +175,6 @@ public class SkiResort {
         this.setPriceRange(request.getPriceRange());
         this.setAnnualSnowfall(request.getAnnualSnowfall());
         this.setMountainStat(request.getMountainStat());
-        this.setAddresses(request.getAddresses());
+        this.setAddress(request.getAddress());
     }
 }

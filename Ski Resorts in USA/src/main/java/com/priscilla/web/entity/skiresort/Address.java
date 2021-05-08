@@ -35,7 +35,7 @@ public class Address {
     @Column(nullable = false, columnDefinition = "char(15)")
     private String zipCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "ski_resort_id", updatable = false)
     @JsonIgnore
     private SkiResort skiResort;
