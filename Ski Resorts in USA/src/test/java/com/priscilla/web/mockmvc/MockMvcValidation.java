@@ -57,16 +57,18 @@ public class MockMvcValidation{
 
         if (skiResort != null) {
             MountainStat mountainStat = skiResort.getMountainStat();
-            List<Address> Addresses = skiResort.getAddresses();
+//            List<Address> Addresses = skiResort.getAddresses();
+            Address Address = skiResort.getAddress();
 
             System.out.println("Ski Resort Id = " + skiResort.getId());
             System.out.println("Ski Resort Id = " + skiResort.getId());
             this.resultActions.andExpect(jsonPath("$.id").value(skiResort.getId()))
                               .andExpect(jsonPath("$.mountainStat.id").value(mountainStat.getId()));
+            this.resultActions.andExpect(jsonPath("$.address.id").value(Address.getId()));
 
-            for (int i = 0; i < skiResort.getAddresses().size(); i++) {
-                this.resultActions.andExpect(jsonPath("$.addresses[" + i + "].id").value(Addresses.get(i).getId()));
-            }
+//            for (int i = 0; i < skiResort.getAddresses().size(); i++) {
+//                this.resultActions.andExpect(jsonPath("$.addresses[" + i + "].id").value(Addresses.get(i).getId()));
+//            }
         } else {
             this.resultActions.andExpect(jsonPath("$.id").hasJsonPath())
                               .andExpect(jsonPath("$.mountainStat.id").hasJsonPath());
@@ -78,7 +80,8 @@ public class MockMvcValidation{
 
         if (reqSkiResort != null) {
             JSONObject reqMountainStat = reqSkiResort.getJSONObject("mountainStat");
-            JSONArray reqAddresses = reqSkiResort.getJSONArray("addresses");
+            JSONObject reqAddress = reqSkiResort.getJSONObject("address");
+//            JSONArray reqAddresses = reqSkiResort.getJSONArray("addresses");
 
             expectSkiResort(reqSkiResort.getString("name"), reqSkiResort.getString("website"),
                             reqSkiResort.getString("priceRange"), reqSkiResort.getInt("annualSnowfall"));
@@ -89,14 +92,17 @@ public class MockMvcValidation{
                                 reqMountainStat.getInt("pctBeginnerTerrain"), reqMountainStat.getInt("pctIntermediateTerrain"),
                                 reqMountainStat.getInt("pctAdvancedTerrain"), reqMountainStat.getInt("pctExpertTerrain") );
 
-            for (int i = 0; i < reqAddresses.length(); i++) {
-                JSONObject reqAddress = reqAddresses.getJSONObject(i);
-                expectAddress(i, reqAddress.getString("name"), reqAddress.getString("street"),
-                              reqAddress.getString("city"), reqAddress.getString("state"), reqAddress.getString("zipCode"));
-            }
+            expectAddress(reqAddress.getString("name"), reqAddress.getString("street"), reqAddress.getString("city"), reqAddress.getString("state"), reqAddress.getString("zipCode"));
+
+//            for (int i = 0; i < reqAddresses.length(); i++) {
+//                JSONObject reqAddress = reqAddresses.getJSONObject(i);
+//                expectAddress(i, reqAddress.getString("name"), reqAddress.getString("street"),
+//                              reqAddress.getString("city"), reqAddress.getString("state"), reqAddress.getString("zipCode"));
+//            }
         } else {
             MountainStat mountainStat = skiResort.getMountainStat();
-            List<Address> addresses = skiResort.getAddresses();
+//            List<Address> addresses = skiResort.getAddresses();
+            Address address = skiResort.getAddress();
 
             expectSkiResort(skiResort.getName(), skiResort.getWebsite(), skiResort.getPriceRange().name(), skiResort.getAnnualSnowfall());
 
@@ -104,11 +110,12 @@ public class MockMvcValidation{
                                 mountainStat.getNumRuns(), mountainStat.getNumLifts(), mountainStat.getNumTerrainParks(),
                                 mountainStat.getPctBeginnerTerrain(), mountainStat.getPctIntermediateTerrain(),
                                 mountainStat.getPctAdvancedTerrain(), mountainStat.getPctExpertTerrain() );
+            expectAddress(address.getName(), address.getStreet(), address.getCity(), address.getState().name(), address.getZipCode());
 
-            for (int i = 0; i < addresses.size(); i++) {
-                Address address = addresses.get(i);
-                expectAddress(i, address.getName(), address.getStreet(), address.getCity(), address.getState().name(), address.getZipCode());
-            }
+//            for (int i = 0; i < addresses.size(); i++) {
+//                Address address = addresses.get(i);
+//                expectAddress(i, address.getName(), address.getStreet(), address.getCity(), address.getState().name(), address.getZipCode());
+//            }
         }
 
         System.out.println("MockMvc Body Object Ski Resort Checked");
@@ -138,14 +145,23 @@ public class MockMvcValidation{
                           .andExpect(jsonPath("$.mountainStat.pctExpertTerrain").value(pctExpertTerrain));
     }
 
-    private void expectAddress(Integer idx, Object name, Object street, Object city, Object state, Object zipCode) throws Exception {
+    private void expectAddress(Object name, Object street, Object city, Object state, Object zipCode) throws Exception {
 
-        this.resultActions.andExpect(jsonPath("$.addresses[" + idx + "].name").value(name))
-                          .andExpect(jsonPath("$.addresses[" + idx + "].street").value(street))
-                          .andExpect(jsonPath("$.addresses[" + idx + "].city").value(city))
-                          .andExpect(jsonPath("$.addresses[" + idx + "].state").value(state))
-                          .andExpect(jsonPath("$.addresses[" + idx + "].zipCode").value(zipCode));
+        this.resultActions.andExpect(jsonPath("$.addresses.name").value(name))
+                .andExpect(jsonPath("$.addresses.street").value(street))
+                .andExpect(jsonPath("$.addresses.city").value(city))
+                .andExpect(jsonPath("$.addresses.state").value(state))
+                .andExpect(jsonPath("$.addresses.zipCode").value(zipCode));
     }
+
+//    private void expectAddress(Integer idx, Object name, Object street, Object city, Object state, Object zipCode) throws Exception {
+//
+//        this.resultActions.andExpect(jsonPath("$.addresses[" + idx + "].name").value(name))
+//                          .andExpect(jsonPath("$.addresses[" + idx + "].street").value(street))
+//                          .andExpect(jsonPath("$.addresses[" + idx + "].city").value(city))
+//                          .andExpect(jsonPath("$.addresses[" + idx + "].state").value(state))
+//                          .andExpect(jsonPath("$.addresses[" + idx + "].zipCode").value(zipCode));
+//    }
 
 //    public abstract void validateBodySkiResort(RequestBuilder requestBuilder, Object object) throws Exception;
 //

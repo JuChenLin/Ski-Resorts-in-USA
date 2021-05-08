@@ -10,11 +10,17 @@ import org.springframework.stereotype.Component;
 public class SkiResortJSONObjectFactory {
 
     public JSONObject createInstance01() throws JSONException {
-        String[] addresses_name = { "lodge 1", "lodge 2"};
-        String[] addresses_street = { "street 1", "street 2"};
-        String[] addresses_city = { "city 1", "city 2"};
-        String[] addresses_state = { "CA", "NV"};
-        String[] addresses_zipCode = { "12345", "54321"};
+//        String[] addresses_name = { "lodge 1", "lodge 2"};
+//        String[] addresses_street = { "street 1", "street 2"};
+//        String[] addresses_city = { "city 1", "city 2"};
+//        String[] addresses_state = { "CA", "NV"};
+//        String[] addresses_zipCode = { "12345", "54321"};
+
+        String addresses_name = "lodge 1";
+        String addresses_street = "street 1";
+        String addresses_city = "city 1";
+        String addresses_state = "CA";
+        String addresses_zipCode = "12345";
 
         return createSkiResortJSONObject(null, "Ski Resort Json Object 01", "www.skiresort01.com", "HIGH", 360,
                                          3500, 7953,11053, 150, 25,9,
@@ -23,11 +29,17 @@ public class SkiResortJSONObjectFactory {
     }
 
     public JSONObject createInstance01(SkiResort skiResort) throws JSONException {
-        String[] addresses_name = { "lodge 1", "lodge 2"};
-        String[] addresses_street = { "street 1", "street 2"};
-        String[] addresses_city = { "city 1", "city 2"};
-        String[] addresses_state = { "CA", "NV"};
-        String[] addresses_zipCode = { "12345", "54321"};
+//        String[] addresses_name = { "lodge 1", "lodge 2"};
+//        String[] addresses_street = { "street 1", "street 2"};
+//        String[] addresses_city = { "city 1", "city 2"};
+//        String[] addresses_state = { "CA", "NV"};
+//        String[] addresses_zipCode = { "12345", "54321"};
+
+        String addresses_name = "lodge 1";
+        String addresses_street = "street 1";
+        String addresses_city = "city 1";
+        String addresses_state = "CA";
+        String addresses_zipCode = "12345";
 
         return createSkiResortJSONObject(skiResort, "Ski Resort Json Object 01", "www.skiresort01.com", "HIGH", 360,
                                         3500, 7953,11053, 150, 25,9,
@@ -40,22 +52,23 @@ public class SkiResortJSONObjectFactory {
                                                  Integer numRuns, Integer numLifts, Integer numTerrainParks,
                                                  Integer pctBeginnerTerrain, Integer pctIntermediateTerrain,
                                                  Integer pctAdvancedTerrain, Integer pctExpertTerrain,
-                                                 String[] addresses_name, String[] addresses_street, String[] addresses_city,
-                                                 String[] addresses_state, String[] addresses_zipCode) throws JSONException {
+                                                 String addresses_name, String addresses_street, String addresses_city,
+                                                 String addresses_state, String addresses_zipCode) throws JSONException {
 
         Integer mountainStatID = skiResort != null ? skiResort.getMountainStat().getId() : null;
         JSONObject mountainStat = createMountainStatJSONObject( mountainStatID, acres, baseElevation, peakElevation,
                                                                 numRuns, numLifts, numTerrainParks,
-                                                                pctBeginnerTerrain, pctIntermediateTerrain, pctAdvancedTerrain, pctExpertTerrain);
+                                                                pctBeginnerTerrain, pctIntermediateTerrain, pctAdvancedTerrain, pctExpertTerrain );
+        Integer addressID =  skiResort != null ? skiResort.getAddress().getId() : null;
+        JSONObject address = createAddressJSONObject( addressID, addresses_name, addresses_street, addresses_city, addresses_state, addresses_zipCode );
 
-
-        JSONArray addresses = new JSONArray();
-        for (int i = 0; i < addresses_name.length; i++) {
-            Integer addressID =  skiResort != null ? skiResort.getAddresses().get(i).getId() : null;
-            JSONObject address = createAddressJSONObject(addressID, addresses_name[i],
-                                                         addresses_street[i], addresses_city[i], addresses_state[i], addresses_zipCode[i]);
-            addresses.put(address);
-        }
+//        JSONArray addresses = new JSONArray();
+//        for (int i = 0; i < addresses_name.length; i++) {
+//            Integer addressID =  skiResort != null ? skiResort.getAddresses().get(i).getId() : null;
+//            JSONObject address = createAddressJSONObject(addressID, addresses_name[i],
+//                                                         addresses_street[i], addresses_city[i], addresses_state[i], addresses_zipCode[i]);
+//            addresses.put(address);
+//        }
 
         JSONObject ski_resort = new JSONObject();
         ski_resort.put("name", name);
@@ -63,7 +76,7 @@ public class SkiResortJSONObjectFactory {
         ski_resort.put("priceRange", priceRange);
         ski_resort.put("annualSnowfall", annualSnowfall);
         ski_resort.put("mountainStat", mountainStat);
-        ski_resort.put("addresses", addresses);
+        ski_resort.put("addresses", address);
 
         return ski_resort;
     }
