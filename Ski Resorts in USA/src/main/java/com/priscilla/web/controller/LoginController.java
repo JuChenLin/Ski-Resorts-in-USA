@@ -59,14 +59,10 @@ public class LoginController {
                 oauth2AuthenticationUrls.put(registration.getClientName(), authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
         model.addAttribute("urls", oauth2AuthenticationUrls);
 
-//        if (principal != null) {
-//            System.out.println("Login User:" + principal);
-//            model.addAttribute("user", principal.getAttribute("name"));
-//        }
-
         addModelAttributes.modelOAuth2User(principal, model);
 
-        return "/login/oauth";
+//        return "/login/oauth";
+        return "/layout/base/signin";
     }
 
     @GetMapping("/loginSuccess")
