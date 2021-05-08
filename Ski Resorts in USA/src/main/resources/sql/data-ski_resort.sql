@@ -10,8 +10,8 @@ INSERT INTO `ski_resort` (name, website, price_range, annual_snowfall) VALUES ('
 INSERT INTO `mountain_stat` (acres, base_elevation, peak_elevation, num_runs, num_lifts, num_terrain_parks, pct_beginner_terrain, pct_intermediate_terrain, pct_advanced_terrain, pct_expert_terrain, ski_resort_id)
        VALUES (4800, 7170, 10067, 97, 28, 3, 8, 62, 25, 5, 2);
 INSERT INTO `address` (name, street, city, state, zip_code, ski_resort_id) VALUES ('California Lodge', '3860 Saddle Road', 'South Lake Tahoe', 'CA', 96150, 2);
-INSERT INTO `address` (name, street, city, state, zip_code, ski_resort_id) VALUES ('Stagecoach Lodge', '375 Quaking Aspen Lane', 'Stateline', 'NV', 89449, 2);
-INSERT INTO `address` (name, street, city, state, zip_code, ski_resort_id) VALUES ('Boulder Lodge', '140 S. Benjamin Drive', 'Stateline', 'NV', 89449, 2);
+--INSERT INTO `address` (name, street, city, state, zip_code, ski_resort_id) VALUES ('Stagecoach Lodge', '375 Quaking Aspen Lane', 'Stateline', 'NV', 89449, 2);
+--INSERT INTO `address` (name, street, city, state, zip_code, ski_resort_id) VALUES ('Boulder Lodge', '140 S. Benjamin Drive', 'Stateline', 'NV', 89449, 2);
 
 
 -- Sugar Bowl
