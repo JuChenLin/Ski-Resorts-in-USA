@@ -23,7 +23,7 @@ public class EditPageController {
     public String addAddress(SkiResort skiResort, Model model) {
         System.out.println("EditPageController --- add address method executed before skiResortService.");
         System.out.println("EditPageController --- input skiResort: " + skiResort);
-        skiResortService.addEmptyAddressField(skiResort);
+//        skiResortService.addEmptyAddressField(skiResort);
         System.out.println("EditPageController --- add address method executed after skiResortService..");
         System.out.println("EditPageController --- updated skiResort: " + skiResort);
 

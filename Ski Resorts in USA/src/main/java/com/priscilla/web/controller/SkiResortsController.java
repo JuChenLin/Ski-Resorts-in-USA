@@ -32,17 +32,20 @@ public class SkiResortsController {
         addModelAttributes.modelOAuth2User(principal, model);
 //        System.out.println("SkiResortsController ---> model: " + model);
 
-        return "/skiresort/list";
+//        return "/skiresort/list";
+        return "/layout/base/list";
     }
 
     @GetMapping("/{id}")
     public String readSkiResort (@AuthenticationPrincipal OAuth2User principal, @PathVariable("id") Integer id, Model model) {
         SkiResort skiResort = skiResortService.getSkiResort(id);
 
+        addModelAttributes.modelSkiResortEnum(model);
         addModelAttributes.modelSkiResort(skiResort, model);
         addModelAttributes.modelOAuth2User(principal, model);
 
-        return "/skiresort/detail";
+//        return "/skiresort/detail";
+        return "/layout/base/detail";
     }
 
 //    @GetMapping("/edit")
