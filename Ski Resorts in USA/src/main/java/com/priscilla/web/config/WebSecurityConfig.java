@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.endpoint.NimbusAuthorizationCodeTokenResponseClient;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
@@ -58,18 +59,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         http.authorizeRequests()
-                .antMatchers("/", "/login","/error", "/webjars/**")
-                    .permitAll()
-                .antMatchers(HttpMethod.GET, "/my-favorites/**")
-                    .authenticated()
-                .and()
-                    .oauth2Login().loginPage(LOGIN_URL).defaultSuccessUrl("/ski-resorts").failureUrl("/loginFailure").userInfoEndpoint().oidcUserService(customOidcUserService);
+                .antMatchers("/", "/login", "/ski-resorts", "/error", "/webjars/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/my-favorites/**").authenticated()
+                .antMatchers("/admin/**").hasAuthority("ADMIN");
+
+        http.formLogin()
+                .loginPage(LOGIN_URL)
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl(LOGOUT_SUCCESS_URL, true)
+                .failureUrl("/loginFailure");
+
+        http.oauth2Login()
+                .loginPage(LOGIN_URL)
+                .defaultSuccessUrl(LOGOUT_SUCCESS_URL)
+                .failureUrl("/loginFailure")
+                .userInfoEndpoint()
+                .oidcUserService(customOidcUserService);
 //                .and()
 //                    .logout().logoutSuccessUrl("/").permitAll()
 //                .and()
 //                    .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 
-        http.logout().logoutSuccessHandler(oidcLogoutSuccessHandler()).invalidateHttpSession(true).clearAuthentication(true).deleteCookies("JSESSIONID");
+        http.logout()
+                .logoutSuccessHandler(oidcLogoutSuccessHandler())
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID");
     }
 
 
@@ -78,5 +95,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         successHandler.setPostLogoutRedirectUri("http://localhost:8082/index");
 
         return successHandler;
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth)
+            throws Exception {
+        auth
+                .inMemoryAuthentication()
+                .withUser("user").password(passwordEncoder().encode("password")).roles("USER")
+                .and()
+                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
