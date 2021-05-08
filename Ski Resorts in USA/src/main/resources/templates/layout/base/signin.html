@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+
+    <title>Ski Resorts in USA - Login</title>
+
+    <!-- CSS -->
+    <link type="text/css" href="/assets/css/signin.css" th:href="@{/assets/css/signin.css}" rel="stylesheet">
+    <!-- JavaScript -->
+    <script src="/webjars/jquery/jquery.min.js" th:src="@{/webjars/jquery/jquery.min.js}" type="text/javascript"></script>
+<!--        <script src="/assets/js/oauth.js" th:src="@{/assets/js/oauth.js}"></script>-->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <div class="container" sec:authorize="!isAuthenticated()">
+<!--        <div class="login-container">-->
+<!--            <form action="/action_page.php">-->
+<!--                <div class="row">-->
+<!--                    <h2 style="text-align:center">Log in</h2>-->
+<!--                    <div class="vl">-->
+<!--                        <span class="vl-innertext">or</span>-->
+<!--                    </div>-->
+
+<!--                    <div class="col">-->
+<!--                        <div class="hide-md-lg">-->
+<!--                            <h5>Or sign in manually:</h5>-->
+<!--                        </div>-->
+<!--                        <a class="facebook btn" th:if="${#maps.containsKey(urls, 'Facebook')}" th:href="${urls.get('Facebook')}">-->
+<!--                            <i class="fab fa-facebook-square fa-lg"></i>-->
+<!--                            <span th:if="${user==null}"> Login with Facebook </span>-->
+<!--                            &lt;!&ndash;            <span th:if="${user!=null}"> Login as [[${user}]] </span>&ndash;&gt;-->
+<!--                        </a>-->
+<!--                        <a class="twitter btn" th:if="${#maps.containsKey(urls, 'Twitter')}" th:href="${urls.get('Twitter')}">-->
+<!--                            <i class="fab fa-twitter-square fa-lg"></i>-->
+<!--                            <span th:if="${user==null}"> Login with Twitter </span>-->
+<!--                        </a>-->
+<!--                        <a class="google btn" th:if="${#maps.containsKey(urls, 'Google')}" th:href="${urls.get('Google')}">-->
+<!--                            <i class="fab fa-google-plus-square fa-lg"></i>-->
+<!--                            <span th:if="${user==null}"> Login with Google+ </span>-->
+<!--                            &lt;!&ndash;            <span th:if="${user!=null}"> Login as [[${user}]] </span>&ndash;&gt;-->
+<!--                        </a>-->
+<!--                    </div>-->
+
+<!--                    <div class="col">-->
+<!--                        <div class="hide-md-lg">-->
+<!--                            <h5>Or sign in manually:</h5>-->
+<!--                        </div>-->
+<!--                        <input type="text" name="username" placeholder="Username" required>-->
+<!--                        <input type="password" name="password" placeholder="Password" required>-->
+<!--                        <input type="submit" value="Login">-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+        <div class="login-container">
+<!--            <form action="/action_page.php">-->
+            <div>
+                <div class="row">
+                    <h2 style="text-align:center">Log in</h2>
+                    <div class="vl">
+                        <span class="vl-innertext">or</span>
+                    </div>
+
+                    <div class="col">
+                        <div class="hide-md-lg">
+                            <h5>Or sign in manually:</h5>
+                        </div>
+                        <a class="facebook btn" th:if="${#maps.containsKey(urls, 'Facebook')}" th:href="${urls.get('Facebook')}">
+                            <i class="fab fa-facebook-square fa-lg"></i>
+                            <span th:if="${user==null}"> Login with Facebook </span>
+                            <!--            <span th:if="${user!=null}"> Login as [[${user}]] </span>-->
+                        </a>
+                        <a class="twitter btn" th:if="${#maps.containsKey(urls, 'Twitter')}" th:href="${urls.get('Twitter')}">
+                            <i class="fab fa-twitter-square fa-lg"></i>
+                            <span th:if="${user==null}"> Login with Twitter </span>
+                        </a>
+                        <a class="google btn" th:if="${#maps.containsKey(urls, 'Google')}" th:href="${urls.get('Google')}">
+                            <i class="fab fa-google-plus-square fa-lg"></i>
+                            <span th:if="${user==null}"> Login with Google+ </span>
+                            <!--            <span th:if="${user!=null}"> Login as [[${user}]] </span>-->
+                        </a>
+                    </div>
+
+                    <div class="col">
+                        <div class="hide-md-lg">
+                            <h5>Or sign in manually:</h5>
+                        </div>
+                        <form action="/login" th:action="@{/login}" method="post">
+                            <input type="text" name="username" placeholder="Username" required>
+                            <input type="password" name="password" placeholder="Password" required>
+                            <input type="submit" value="Login">
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+<!--            </form>-->
+        </div>
+
+        <div class="bottom-container">
+            <div class="row">
+                <div class="col">
+                    <a href="#" style="color:white" class="btn">Sign up</a>
+                </div>
+                <div class="col">
+                    <a href="#" style="color:white" class="btn">Forgot password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" sec:authorize="isAuthenticated()">
+        <div>
+            <h3 style="text-align:center">You've logged in as <b> [[${user.name}]] </b></h3>
+        </div>
+        <a class="logged btn" th:href="@{/index}"> Back to main page</a>
+        <form class="authenticated" th:action="@{/logout}" method="post">
+            <button type="submit" class="logged btn">Log out / Switch account</button>
+        </form>
+        <!--            <a class="logged btn" th:href="@{/logout}"> Log out / Switch account</a>-->
+    </div>
+
+</body>
+</html>

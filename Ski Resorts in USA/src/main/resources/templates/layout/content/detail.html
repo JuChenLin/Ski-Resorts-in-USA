@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <title>Ski Resort in USA - [[${resort.name}]]</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/blog/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="detail.css" th:href="@{/asserts/css/detail.css}" rel="stylesheet">
+</head>
+<body>
+
+    <main role="main" class="container">
+        <!-- Top : Large Image -->
+        <div th:fragment="top">
+            <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+                <div class="col-md-6 px-0">
+                    <h1 class="display-4 font-italic">[[${resort.name}]]</h1>
+<!--                    <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>-->
+<!--                    <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>-->
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+              <!--              <strong class="d-inline-block mb-2 text-primary">World</strong>-->
+                            <h3 class="mb-0">Ski School</h3>
+              <!--              <div class="mb-1 text-muted">Nov 12</div>-->
+                            <p class="card-text mb-auto">Ski school information</p>
+                            <a href="#" class="stretched-link">More info</a>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#55595c"/>
+                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Image</text>
+<!--                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>-->
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+              <!--              <strong class="d-inline-block mb-2 text-success">Design</strong>-->
+                            <h3 class="mb-0">Nearby Lodge</h3>
+              <!--              <div class="mb-1 text-muted">Nov 11</div>-->
+                            <p class="mb-auto">Nearby lodge information</p>
+                            <a href="#" class="stretched-link">More info</a>
+                        </div>
+                        <div class="col-auto d-none d-lg-block">
+                            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#55595c"/>
+                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Image</text>
+<!--                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>-->
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--  Main: Cards Block  -->
+        <div th:fragment="central" class="row">
+            <div class="col-md-8 blog-main">
+                <div class="blog-post">
+                    <div class="row my-3" style="width:auto">
+                        <div class="col-md-9">
+                            <p style="margin-top:1rem; font-size: 20px;"><a class="text-info" th:href="${resort.website}">[[${resort.website}]]</a></p>
+                        </div>
+                        <div class="col-md-3">
+                            <p style="margin-top:1rem; font-size: 20px;"><b>[[${resort.priceRange.getSymbol()}]]</b></p>
+                        </div>
+                        <!--        <hr>-->
+                        <!--        <blockquote>-->
+                        <!--          <p>Description...</p>-->
+                        <!--        </blockquote>-->
+                        <!--        <hr>-->
+                    </div>
+
+                    <div class="my-3" style="width:auto">
+                        <h3>Mountain Stat</h3>
+                        <table class="table table-borderless text-table">
+                            <tr class="text-row">
+                                <td>Annual Snowfall</td>
+                                <td>Annual [[${resort.annualSnowfall}]] "</td>
+                            </tr>
+                            <tr class="text-row">
+                                <td>Skiable Acres</td>
+                                <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.baseElevation}]] ac</td>
+                            </tr>
+                            <tr class="text-row">
+                                <td>Elevation</td>
+                                    <td>
+                                        <table class="table table-borderless text-table">
+                                            <col style="width:50%">
+                                            <col style="width:50%">
+                                            <tr class="text-row">
+                                                <td>Base</td>
+                                                <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.baseElevation}]] ft</td>
+                                            </tr>
+                                            <tr class="text-row">
+                                                <td>Peak</td>
+                                                <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.peakElevation}]] ft</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </td>
+                            </tr>
+
+                            <tr class="text-row">
+                                <td>Runs</td>
+                                <td>
+                                    <p >Total [[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.numRuns}]] Runs</p>
+                                    <table class="table table-borderless text-table">
+                                        <col style="width:50%">
+                                        <col style="width:50%">
+                                        <tr class="text-row">
+                                            <td>Beginner</td>
+                                            <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.pctBeginnerTerrain}]] %</td>
+                                        </tr>
+                                        <tr class="text-row">
+                                            <td>Intermediate</td>
+                                            <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.pctIntermediateTerrain}]] %</td>
+                                        </tr>
+                                        <tr class="text-row">
+                                            <td>Intermediate</td>
+                                            <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.pctAdvancedTerrain}]] %</td>
+                                        </tr>
+                                        <tr class="text-row">
+                                            <td>Intermediate</td>
+                                            <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.pctExpertTerrain}]] %</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr class="text-row">
+                                <td>Lifts</td>
+                                <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.numLifts}]] lifts</td>
+                            </tr>
+
+                            <tr class="text-row">
+                                <td>Terrain Parks</td>
+                                <td>[[${resort!=null&&resort.mountainStat!=null}?${resort.mountainStat.numTerrainParks}]] Terrain Parks</td>
+                            </tr>
+
+                            <tr class="text-row">
+                                <td>Annual Snowfall</td>
+                                <td>Annual [[${resort.annualSnowfall}]] "</td>
+                            </tr>
+
+                            <tr class="text-row">
+                                <td>Price Range</td>
+                                <td>[[${resort.priceRange}]]</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="my-3" style="width:auto">
+                        <h3>Address</h3>
+                        <div>
+                            <p><b>[[${resort.address.name}]]</b></p>
+                            <p>[[${resort.address.street}]], [[${resort.address.city}]], [[${resort.address.state}]] [[${resort.address.zipCode}]]</p>
+                        </div>
+                    </div>
+                </div><!-- /.blog-post -->
+            </div><!-- /.blog-main -->
+
+            <aside class="col-md-4 blog-sidebar">
+                <div class="p-4 mb-3 bg-light rounded">
+                    <h4 class="font-italic">Snow Report</h4>
+                    <p> Ski report details...</p>
+<!--                    <p class="mb-0">Saw you downtown singing the Blues. Watch you circle the drain. Why don't you let me stop by? Heavy is the head that <em>wears the crown</em>. Yes, we make angels cry, raining down on earth from up above.</p>-->
+                </div>
+
+                <div class="p-4">
+                    <h4 class="font-italic">Ski-In Ski-Out Accommodations</h4>
+                    <ol class="list-unstyled mb-0">
+                        <li><a href="#">Hotel 1</a></li>
+                        <li><a href="#">Hotel 2</a></li>
+                        <li><a href="#">Hotel 3</a></li>
+                    </ol>
+                </div>
+
+            </aside><!-- /.blog-sidebar -->
+        </div><!-- /.row -->
+
+        <nav th:fragment="manage" class="manage my-3">
+            <a class="btn btn-outline-primary" href="#">Edit</a>
+<!--            <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>-->
+        </nav>
+    </main><!-- /.container -->
+
+</body>
+</html>

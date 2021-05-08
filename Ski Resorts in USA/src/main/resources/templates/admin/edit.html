@@ -95,26 +95,26 @@
 <!--                        </select>-->
 <!--                    </div>-->
 
-                    <div class="my-1 input-group" th:each="address,iter : ${resort!=null&&resort.addresses!=null}?${resort.addresses}">
-                        <h6 class="col-12 my-1">Address [[${iter.count}]]</h6>
+<!--                    <div class="my-1 input-group" th:each="address,iter : ${resort!=null&&resort.addresses!=null}?${resort.addresses}">-->
+<!--                        <h6 class="col-12 my-1">Address</h6>-->
                         <div class="col-md-12">
                             <label for="inputStreet" class="form-label">Street</label>
-                            <input name="address.street" type="text" class="form-control" id="inputStreet" th:value="${resort!=null&&address!=null}?${address.street}">
+                            <input name="address.street" type="text" class="form-control" id="inputStreet" th:value="${resort!=null&&resort.address!=null}?${resort.address.street}">
                         </div>
                         <div class="col-md-6">
                             <label for="inputCity" class="form-label">City</label>
-                            <input name="address.city" type="text" class="form-control" id="inputCity" th:value="${resort!=null&&address!=null}?${address.city}">
+                            <input name="address.city" type="text" class="form-control" id="inputCity" th:value="${resort!=null&&resort.address!=null}?${resort.address.city}">
                         </div>
                         <div class="col-md-3">
                             <label for="inputState" class="form-label">State</label>
                             <select name="address.state" class="form-control" id="inputState">
                                 <option selected disabled value="">Choose a State</option>
-                                <option th:selected="${resort!=null&&address!=null}?${state == address.state}" th:value="${state}" th:each="state:${states}" th:text="${state}">1</option>
+                                <option th:selected="${resort!=null&&resort.address!=null}?${state == resort.address.state}" th:value="${state}" th:each="state:${states}" th:text="${state}">1</option>
                             </select>
                         </div>
                         <div class="col-md-3">
                             <label for="inputZip" class="form-label">Zip Code</label>
-                            <input name="address.zipCode" type="text" class="form-control" id="inputZip" th:value="${resort!=null&&address!=null}?${address.zipCode}">
+                            <input name="address.zipCode" type="text" class="form-control" id="inputZip" th:value="${resort!=null&&resort.address!=null}?${resort.address.zipCode}">
                         </div>
                     </div>
 
