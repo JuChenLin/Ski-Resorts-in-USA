@@ -29,13 +29,7 @@ public class SkiResortService {
         SkiResort skiResort = new SkiResort(request);
 
         skiResort.getMountainStat().setSkiResort(skiResort);
-
-        List<Address> addresses = skiResort.getAddresses();
-        if (addresses != null) {
-            for (int i = 0; i < addresses.size(); i++) {
-                addresses.get(i).setSkiResort(skiResort);
-            }
-        }
+        skiResort.getAddress().setSkiResort(skiResort);
 
         return skiResortRepository.save(skiResort);
     }
@@ -83,22 +77,22 @@ public class SkiResortService {
         SkiResort skiResort = new SkiResort();
 
         skiResort.setMountainStat(new MountainStat());
-        skiResort.setAddresses(new ArrayList<Address>());
+        skiResort.setAddress(new Address());
 
         return skiResort;
     }
 
-    public void addEmptyAddressField(SkiResort skiResort) {
-        System.out.println("SkiResortService --- add address method executed before adding addresses list to skiResort.");
-        System.out.println("SkiResortService --- input skiResort: " + skiResort);
-
-        if (skiResort.getAddresses() == null) {
-            skiResort.setAddresses(new ArrayList<Address>());
-        }
-        skiResort.getAddresses().add(new Address());
-        System.out.println("SkiResortService --- updated skiResort: " + skiResort);
-
-        System.out.println("SkiResortService --- add address method executed after adding addresses list to skiResort.");
-    }
+//    public void addEmptyAddressField(SkiResort skiResort) {
+//        System.out.println("SkiResortService --- add address method executed before adding addresses list to skiResort.");
+//        System.out.println("SkiResortService --- input skiResort: " + skiResort);
+//
+//        if (skiResort.getAddresses() == null) {
+//            skiResort.setAddresses(new ArrayList<Address>());
+//        }
+//        skiResort.getAddresses().add(new Address());
+//        System.out.println("SkiResortService --- updated skiResort: " + skiResort);
+//
+//        System.out.println("SkiResortService --- add address method executed after adding addresses list to skiResort.");
+//    }
 
 }
